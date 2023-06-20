@@ -21,10 +21,11 @@ router.post('/createuser',body("email").isEmail(),body("password").isLength({min
             location:req.body.location,
             password:newPassword
         })
-        res.send({success:"true"})
+        const authToken = jwt.sign(data,jwtSecret)
+        res.send({success:true,authToken:authToken})
     } catch (err) {
         console.log(err);
-        res.send({success:"false"})
+        res.send({success:false})
     }
 })
 router.post('/loginuser',body("email").isEmail(),body("password").isLength({min:5}),async (req,res)=>{
