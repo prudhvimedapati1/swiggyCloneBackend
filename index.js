@@ -17,6 +17,7 @@ app.use('/api',require('./routes/CreateUser'))
 app.use('/api',require('./routes/DisplayData'))
 app.use('/api',require('./routes/OrderData'))
 app.use('/api',require('./routes/MyOrders'))
+app.use('/api',require('./routes/MyDetails'))
 
 app.get('/',(req,res)=>{
     res.send('Hello world');
