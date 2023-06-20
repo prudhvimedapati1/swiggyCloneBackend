@@ -20,9 +20,16 @@ router.post('/createuser',body("email").isEmail(),body("password").isLength({min
             email:req.body.email,
             location:req.body.location,
             password:newPassword
-        })
-        const authToken = jwt.sign(data,jwtSecret)
-        res.send({success:true,authToken:authToken})
+        }).then(user => {
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+            const authToken = jwt.sign(data,jwtSecret)
+            res.send({success:true,authToken:authToken})
+    })
+        
     } catch (err) {
         console.log(err);
         res.send({success:false})
